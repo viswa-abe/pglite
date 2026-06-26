@@ -1,9 +1,10 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 # Phase-0 base-image build for the pglite durability harness.
 # De-risks the WASM toolchain by using the prebuilt npm package (DESIGN.md §14).
 # The base image is prepared once from the default branch; workloads are injected
 # per-run on top of it, so this build cost is paid once.
-set -euo pipefail
+# POSIX sh only (the prepare worker runs build.sh with /bin/sh, not bash).
+set -eu
 
 npm init -y >/dev/null 2>&1 || true
 npm install @electric-sql/pglite@^0.2
